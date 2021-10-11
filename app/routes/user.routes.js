@@ -15,20 +15,32 @@ module.exports = function (app) {
 
     app.get('/api/test/user', [authJwt.verifyToken], controller.userBoard);
 
-    // app.get(
-    //     '/api/test/sup',
-    //     [authJwt.verifyToken, authJwt.isSupervisor],
-    //     controller.supervisorBoard
-    // );
+    app.get(
+        '/api/test/sup',
+        [authJwt.verifyToken, authJwt.isSupervisor],
+        controller.supervisorBoard
+    );
 
     app.get(
         '/api/test/admin',
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.adminBoard
     );
+    app.get(
+        '/api/donationPost',
+        authJwt.verifyToken,
+        DonationPost.getAllDonationPost
+    );
     app.post(
         '/api/donationPost/:id',
-        [authJwt.verifyToken],
+        authJwt.verifyToken,
         DonationPost.donationPost
+    );
+
+    //pending
+    app.get(
+        '/api/getAllDonationPostByUserId/:id',
+        authJwt.verifyToken,
+        DonationPost.getAllDonationPostByUserId
     );
 };

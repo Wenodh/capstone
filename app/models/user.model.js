@@ -15,7 +15,7 @@ const User = mongoose.model(
         donationPost: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'donationPost',
+                ref: 'DonationPost',
             },
         ],
     })

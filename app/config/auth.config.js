@@ -1,6 +1,6 @@
 require('dotenv').config();
 module.exports = {
-    secret: 'sample-secret-key',
+    secret: process.env.SECRETE,
     jwtExpiration: process.env.JWTEXPIRATION,
     jwtRefreshExpiration: process.env.JWTREFRESHEXPIRATION,
 };
