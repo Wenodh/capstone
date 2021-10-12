@@ -11,6 +11,12 @@ exports.signup = (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 8),
+        mobile: req.body.mobile,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        country: req.body.country,
+        pincode: req.body.pincode,
     });
 
     user.save((err, user) => {
@@ -66,7 +72,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     User.findOne({
-        username: req.body.username,
+        email: req.body.email,
     })
         .populate('roles', '-__v')
         .exec(async (err, user) => {
