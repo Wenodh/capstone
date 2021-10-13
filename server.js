@@ -8,7 +8,7 @@ var corsOptions = {
     origin: 'http://localhost:8081',
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -76,6 +76,15 @@ function initial() {
                 }
 
                 console.log("added 'admin' to roles collection");
+            });
+            new Role({
+                name: 'ngo',
+            }).save((err) => {
+                if (err) {
+                    console.log('error', err);
+                }
+
+                console.log("added 'ngo' to roles collection");
             });
         }
     });

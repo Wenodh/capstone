@@ -15,6 +15,6 @@ db.role = require('./role.model');
 db.refreshToken = require('./refreshToken.model');
 db.donationPost = require('./donationPost.model');
 
-db.ROLES = ['user', 'admin', 'supervisor'];
+db.ROLES = ['user', 'admin', 'supervisor', 'ngo'];
 
 module.exports = db;

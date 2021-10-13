@@ -13,3 +13,6 @@ exports.adminBoard = (req, res) => {
 exports.supervisorBoard = (req, res) => {
     res.status(200).send('Supervisor Content.');
 };
+exports.ngoBoard = (req, res) => {
+    res.status(200).send('ngo Content.');
+};

@@ -22,6 +22,8 @@ exports.getAllDonationPost = async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 };
+
+// todo : under development
 exports.getAllDonationPostByUserId = async (req, res) => {
     try {
         const data = await db.user.find({ _id: req.params.id }).populate({
