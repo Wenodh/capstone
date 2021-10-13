@@ -26,21 +26,4 @@ module.exports = function (app) {
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.adminBoard
     );
-    app.get(
-        '/api/donationPost',
-        authJwt.verifyToken,
-        DonationPost.getAllDonationPost
-    );
-    app.post(
-        '/api/donationPost/:id',
-        authJwt.verifyToken,
-        DonationPost.donationPost
-    );
-
-    //pending
-    app.get(
-        '/api/getAllDonationPostByUserId/:id',
-        authJwt.verifyToken,
-        DonationPost.getAllDonationPostByUserId
-    );
 };

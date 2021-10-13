@@ -1,7 +1,7 @@
 const db = require('../models');
 
 const DonationPost = db.donationPost;
-exports.donationPost = async (req, res, next) => {
+exports.donationPost = async (req, res) => {
     try {
         const donationPost = new DonationPost(req.body);
         donationPost.postedBy = req.params.id;
@@ -14,6 +14,46 @@ exports.donationPost = async (req, res, next) => {
         res.status(400).json({ success: false, message: err.message });
     }
 };
+
+//update DonationPost
+exports.updateDonationPost = async (req, res) => {
+    try {
+        const donationPost = await DonationPost.findById(req.params.id);
+        const currentUser = req.body.postedBy;
+        if (currentUser === donationPost.postedBy.toString()) {
+            await donationPost.updateOne({ $set: req.body });
+            res.status(200).json({
+                success: true,
+                message: 'Donation post updated',
+            });
+        } else {
+            res.status(403).json('you can update only your post');
+        }
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
+//delete DonationPost
+exports.deleteDonationPost = async (req, res) => {
+    try {
+        const donationPost = await DonationPost.findById(req.params.id);
+        const currentUser = await db.user.findById({
+            _id: donationPost.postedBy.toString(),
+        });
+        // console.log(currentUser);
+        // console.log(donationPost);
+        await currentUser.updateOne({ $pull: { donationPost: req.params.id } });
+        await donationPost.deleteOne();
+        res.status(200).json({
+            success: true,
+            message: 'Donation post deleted',
+        });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
 exports.getAllDonationPost = async (req, res) => {
     try {
         const data = await db.donationPost.find();
