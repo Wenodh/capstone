@@ -45,4 +45,11 @@ module.exports = function (app) {
         authJwt.verifyToken,
         controller.deleteDonationPost
     );
+
+    //get a donation post by id
+    app.get(
+        '/api/donationPost/:id',
+        authJwt.verifyToken,
+        controller.getDonationPost
+    );
 };

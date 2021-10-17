@@ -1,6 +1,8 @@
 const db = require('../models');
-
+//collection
 const DonationPost = db.donationPost;
+
+//create post
 exports.donationPost = async (req, res) => {
     try {
         const donationPost = new DonationPost(req.body);
@@ -54,9 +56,19 @@ exports.deleteDonationPost = async (req, res) => {
     }
 };
 
+//get a donation post by id
+exports.getDonationPost = async (req, res) => {
+    try {
+        const data = await db.donationPost.findById(req.params.id);
+        res.status(200).json({ success: true, data });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
 exports.getAllDonationPost = async (req, res) => {
     try {
-        const data = await db.donationPost.find();
+        const data = await db.donationPost.find().sort({ timestamp: -1 });
         res.status(200).json({ success: true, data });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
