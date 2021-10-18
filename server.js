@@ -37,6 +37,8 @@ app.get('/', (req, res) => {
     res.json({ message: 'server running' });
 });
 require('./app/routes/auth.routes')(app);
+require('./app/routes/admin.routes')(app);
+require('./app/routes/cart.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/donationPost.routes')(app);
 

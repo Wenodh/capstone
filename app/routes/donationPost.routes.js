@@ -52,4 +52,24 @@ module.exports = function (app) {
         // authJwt.verifyToken,
         controller.getDonationPost
     );
+
+    // // add to cart
+    // app.put(
+    //     '/api/addCart/:id',
+    //     // authJwt.verifyToken,
+    //     controller.updateCart
+    // );
+
+    // // delete cart item
+    // app.put(
+    //     '/api/removeCart/:id',
+    //     // authJwt.verifyToken,
+    //     controller.deleteCart
+    // );
+    // // get cart
+    // app.get(
+    //     '/api/Cart/:id',
+    //     // authJwt.verifyToken,
+    //     controller.getCardById
+    // );
 };
