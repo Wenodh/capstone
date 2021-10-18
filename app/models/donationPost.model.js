@@ -8,6 +8,7 @@ const DonationPost = mongoose.model(
             description: String,
             phone: String,
             address: String,
+            img: String,
             postedBy: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User',

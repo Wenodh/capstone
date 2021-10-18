@@ -39,6 +39,12 @@ const User = mongoose.model(
             required: true,
         },
         pincode: Number,
+        cart: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'DonationPost',
+            },
+        ],
         roles: [
             {
                 type: mongoose.Schema.Types.ObjectId,
