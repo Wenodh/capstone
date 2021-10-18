@@ -3,6 +3,12 @@ const controller = require('../controllers/user.controller');
 const DonationPost = require('../controllers/donationPost.controller');
 
 module.exports = function (app) {
+    //get user by id
+    app.get(
+        '/api/user/:id',
+        // [authJwt.verifyToken, authJwt.isAdmin],
+        controller.getUserById
+    );
     app.use(function (req, res, next) {
         res.header(
             'Access-Control-Allow-Headers',
