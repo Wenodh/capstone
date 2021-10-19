@@ -52,3 +52,15 @@ exports.getCardById = async (req, res) => {
         res.status(400).json({ success: false, message: err.message });
     }
 };
+
+// order cart details
+exports.getCardById = async (req, res) => {
+    try {
+        const data = await db.user
+            .findById({ _id: req.params.id })
+            .populate('cart');
+        res.status(200).json({ success: true, data });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};

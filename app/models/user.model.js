@@ -57,6 +57,12 @@ const User = mongoose.model(
                 ref: 'DonationPost',
             },
         ],
+        orders: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Orders',
+            },
+        ],
     })
 );
 
