@@ -68,7 +68,9 @@ exports.getDonationPost = async (req, res) => {
 
 exports.getAllDonationPost = async (req, res) => {
     try {
-        const data = await db.donationPost.find({}).sort({ modifiedAt: -1 });
+        const data = await db.donationPost
+            .find({ status: 'posted' })
+            .sort({ modifiedAt: -1 });
         res.status(200).json({ success: true, data });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });

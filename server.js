@@ -3,8 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./app/models');
 const app = express();
-
-var corsOptions = {
+const Grid = require('gridfs-stream');
+const mongoose = require('mongoose');
+var mongo = require('mongodb');
+const corsOptions = {
     origin: 'http://localhost:8081',
 };
 
@@ -32,6 +34,13 @@ db.mongoose
         process.exit();
     });
 
+// let gfs;
+// const conn = mongoose.createConnection(db.url);
+// conn.once('open', function () {
+//     gfs = Grid(conn.db, mongo);
+//     gfs.collection('photos');
+// });
+
 // simple route
 app.get('/', (req, res) => {
     res.json({ message: 'server running' });
@@ -41,6 +50,7 @@ require('./app/routes/admin.routes')(app);
 require('./app/routes/cart.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/donationPost.routes')(app);
+require('./app/routes/upload.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

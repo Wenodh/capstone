@@ -28,7 +28,12 @@ exports.deleteCart = async (req, res) => {
             { _id: req.params.id },
             { $pull: { cart: req.body.postId } }
         );
-
+        const approvedPost = await db.donationPost.findByIdAndUpdate(
+            req.body.postId,
+            {
+                status: 'posted',
+            }
+        );
         // data.cart.push(res.body.postId)
         res.status(200).json({ success: true });
     } catch (err) {

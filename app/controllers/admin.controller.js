@@ -86,13 +86,12 @@ exports.getAllDonationPostForApproval = async (req, res) => {
 };
 exports.sendDelivery = async (req, res) => {
     try {
-        const approvedPost = await db.donationPost.findByIdAndUpdate(
+        const data = await db.donationPost.findByIdAndUpdate(
             req.params.postId,
             {
                 status: 'delivered',
             }
         );
-
         // data.cart.push(res.body.postId)
         res.status(200).json({ success: true, data });
     } catch (err) {
