@@ -5,7 +5,7 @@ exports.updateCart = async (req, res) => {
     try {
         const data = await db.user.findByIdAndUpdate(
             { _id: req.params.id },
-            { $push: { cart: req.body.postId } }
+            { $addToSet: { cart: req.body.postId } }
         );
         const approvedPost = await db.donationPost.findByIdAndUpdate(
             req.body.postId,
@@ -35,7 +35,7 @@ exports.deleteCart = async (req, res) => {
             }
         );
         // data.cart.push(res.body.postId)
-        res.status(200).json({ success: true });
+        res.status(200).json({ success: true, data: data });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
