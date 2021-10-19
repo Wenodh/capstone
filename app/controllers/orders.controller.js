@@ -11,10 +11,12 @@ exports.order = async (req, res) => {
         });
         await newOrder.save();
         await data.updateOne(
+            
             { $push: { orders: newOrder._id } },
-            { $set: { cart: [] } },
             { multi: true }
         );
+        const data11 = await db.user.findByIdAndUpdate(req.params.id,{ $set: { cart: [] } })
+       
         const data2 = await db.orders.find(newOrder._id);
         res.status(200).json({ data2 });
     } catch (err) {
