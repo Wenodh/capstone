@@ -18,7 +18,7 @@ module.exports = function (app) {
         controller.order
     );
 
-    // all orders
+    // get all orders
     app.get('/api/order', controller.getAllOrders);
 
     // // delete cart item
