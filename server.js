@@ -184,8 +184,8 @@ var instance = new Razorpay({
 app.post('/create/orderId', (req, res) => {
     // console.log('create orderId request', req.body);
     var options = {
-        // amount: req.body.amount,
-        amount: 50000,
+        amount: req.body.amount,
+        // amount: 50000,
         currency: 'INR',
         receipt: shortid.generate(),
         payment_capture: 1,
