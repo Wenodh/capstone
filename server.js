@@ -11,7 +11,7 @@ const multer = require('multer');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
-const Razorpay = require('razorpay');
+
 const corsOptions = {
     origin: 'http://localhost:8081',
 };
@@ -176,48 +176,6 @@ app.delete('/files/:id', (req, res) => {
     });
 });
 
-var instance = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
-
-app.post('/create/orderId', (req, res) => {
-    // console.log('create orderId request', req.body);
-    var options = {
-        amount: req.body.amount,
-        // amount: 50000,
-        currency: 'INR',
-        receipt: shortid.generate(),
-        payment_capture: 1,
-    };
-    instance.orders.create(options, (err, order) => {
-        console.log(order);
-        res.json(order);
-        // res.send({ orderId: order.id });
-        // res.json({
-        //     id: order.id,
-        //     currency: order.currency,
-        //     amount: order.amount,
-        // });
-    });
-});
-app.post('/api/payment/verify', (req, res) => {
-    let body =
-        req.body.response.razorpay_order_id +
-        '|' +
-        req.body.response.razorpay_payment_id;
-    let crypto = require('crypto');
-    let expectedSignature = crypto
-        .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
-        .update(body.toString())
-        .digest('hex');
-    console.log('sig received ', req.body.response.razorpay_signature);
-    console.log('sig generated ', expectedSignature);
-    let response = { signatureIsValid: 'false' };
-    if (expectedSignature === req.body.response.razorpay_signature)
-        response = { signatureIsValid: 'true' };
-    res.send(response);
-});
 app.get('/', (req, res) => {
     res.json({ message: 'server running' });
 });
@@ -228,6 +186,7 @@ require('./app/routes/user.routes')(app);
 require('./app/routes/donationPost.routes')(app);
 // require('./app/routes/upload.routes')(app);
 require('./app/routes/orders.routes')(app);
+require('./app/routes/payments.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
