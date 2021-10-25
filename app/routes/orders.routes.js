@@ -21,16 +21,6 @@ module.exports = function (app) {
     // get all orders
     app.get('/api/order', controller.getAllOrders);
 
-    // // delete cart item
-    // app.put(
-    //     '/api/removeCart/:id',
-    //     // authJwt.verifyToken,
-    //     controller.deleteCart
-    // );
-    // // get cart
-    // app.get(
-    //     '/api/Cart/:id',
-    //     // authJwt.verifyToken,
-    //     controller.getCardById
-    // );
+    //get order by id
+    app.get('/api/order/:id', controller.getOrderByUserId);
 };

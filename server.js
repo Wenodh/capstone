@@ -15,7 +15,7 @@ const methodOverride = require('method-override');
 const corsOptions = {
     origin: 'http://localhost:8081',
 };
-const shortid = require('shortid');
+
 app.use(cors());
 
 // parse requests of content-type - application/json
