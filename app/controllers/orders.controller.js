@@ -42,12 +42,24 @@ exports.getAllOrders = async (req, res) => {
 
 exports.getOrderByUserId = async (req, res) => {
     try {
-        const data = await db.user
-            .findById({ _id: req.params.id })
-            .populate('orders', '-password -_id -cart -donationPost -__v ');
-
+        const data = await db.orders
+            .find({ orderedBy: req.params.id })
+            .populate('orderItems')
+            .populate(
+                'orderedBy',
+                '-password -_id -cart -roles -donationPost -__v -orders'
+            );
         res.status(200).json({ success: true, data });
     } catch (err) {
         res.status(400).json({ success: false, message: err.message });
     }
+    // try {
+    //     const data = await db.user
+    //         .findById({ _id: req.params.id })
+    //         .populate('orders', '-password');
+
+    //     res.status(200).json({ success: true, data });
+    // } catch (err) {
+    //     res.status(400).json({ success: false, message: err.message });
+    // }
 };
