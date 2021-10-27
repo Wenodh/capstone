@@ -115,7 +115,6 @@ const isNgo = (req, res, next) => {
                         return;
                     }
                 }
-
                 res.status(403).send({ message: 'Require Ngo Role!' });
                 return;
             }
