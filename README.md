@@ -1,7 +1,7 @@
 # capstone
 
-hosted in: <https://capstoneeee.herokuapp.com>
-for sign in-> <https://capstoneeee.herokuapp.com/api/auth/signin>
+- get started with documentation https://documenter.getpostman.com/view/16551157/UVC6jSVT
+- url: https://capstoneeee.herokuapp.com
 
 ## authentication Api
 
